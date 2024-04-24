@@ -47,8 +47,7 @@ jobs:
 
       - name: 🚀 Generate Documentation
         run: |
-          # Run Doxygen command here to generate documentation
-          # Example: doxygen Doxyfile
+          doxygen Doxyfile
           
       - name: 🚀 Upload Documentation Artifact
         uses: actions/upload-artifact@v3
