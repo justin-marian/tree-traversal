@@ -19,8 +19,6 @@ with:
   retention-days: 1
   compression-level: 9
   overwrite: true
-name: Output artifact ID
-  run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}
 
 jobs:
   run:

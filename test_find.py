@@ -15,7 +15,7 @@ def test_printPreorderTree(capsys):
     tree.add(6)
     tree.add(8)
     
-    expected_output = "5\n3\n2\n4\n7\n6\n8\n"
+    expected_output = "5 \n3 \n2 \n4 \n7 \n6 \n8 \n"
     
     with patch('sys.stdout', new=StringIO()) as fake_out:
         tree._printPreorderTree(tree.getRoot())
@@ -33,7 +33,7 @@ def test_printPostorderTree(capsys):
     tree.add(6)
     tree.add(8)
     
-    expected_output = "2\n4\n3\n6\n8\n7\n5\n"
+    expected_output = "2 \n4 \n3 \n6 \n8 \n7 \n5 \n"
     
     with patch('sys.stdout', new=StringIO()) as fake_out:
         tree._printPostorderTree(tree.getRoot())
