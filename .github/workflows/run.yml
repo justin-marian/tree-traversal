@@ -1,7 +1,26 @@
 name: 🚀 Run
 
 on:
-  workflow_dispatch:
+  pull_request:
+    types: [opened, reopened]
+  jobs:
+    specific_review_requested:
+      runs-on: ubuntu-latest
+      if: ${{ github.event.requested_team.name == 'octo-team'}}
+      steps:
+        - run: echo 'A review from octo-team was requested'
+
+uses: actions/upload-artifcat@v3
+id: artifact-upload-step
+with:
+  name: main.py
+  path: main.py
+  if-no-files-found: error
+  retention-days: 1
+  compression-level: 9
+  overwrite: true
+name: Output artifact ID
+  run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}
 
 jobs:
   run:
