@@ -1,33 +1,38 @@
-name: 🚀 Run
+name: 🚀 Run Tree
 
 on:
-  pull_request:
-    types: [opened, reopened]
-  specific_review_requested:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.requested_team.name == 'octo-team'}}
-    steps:
-      run: echo 'A review from octo-team was requested'
-  name: Upload Artifact
-    uses: actions/upload-artifact@v3
-    name: main.py
-    path: main.py
-    if-no-files-found: error
-    retention-days: 1
-    compression-level: 9
-    overwrite: true
+  push:
+    branches:
+      - main
 
 jobs:
+  upload-artifact:
+    name: 📦 Upload Artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: 🚀 Upload main.py
+        uses: actions/upload-artifact@v3
+        with:
+          name: main.py
+          path: main.py
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 9
+          overwrite: true
+
   run:
     name: 🚀 Run
     runs-on: ubuntu-latest
+    needs: upload-artifact
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: 🚀 Run
-        shell: bash
+      - name: 🚀 Run main.py
         run: |
           python3 main.py
